@@ -1,4 +1,4 @@
-package com.spring.selftag;
+package com.spring.selfTag;
 
 /**
  * @Author ycb

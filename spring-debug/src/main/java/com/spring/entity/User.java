@@ -1,7 +1,7 @@
-package com.spring.bean;
+package com.spring.entity;
 
 /**
- * @Author peter
+ * @Author ycb
  * @Date 2021/1/22-16:24
  */
 public class User {
