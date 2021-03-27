@@ -5,7 +5,6 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
-import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.core.PriorityOrdered;
 
 /**
@@ -25,9 +24,6 @@ public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegi
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.rootBeanDefinition(MySelfBeanDefinitionRegistryPostProcessor.class);
 		builder.addPropertyValue("name", "张三");
 		registry.registerBeanDefinition("peter", builder.getBeanDefinition());
-//		registry.registerBeanDefinition("peter", new RootBeanDefinition(Teacher.class));
-
-//		registry.registerBeanDefinition("tom",new RootBeanDefinition(MySelfBeanDefinitionRegistryPostProcessor.class));
 	}
 
 	@Override
