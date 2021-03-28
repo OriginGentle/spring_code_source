@@ -1,4 +1,4 @@
-package com.spring.test;
+package com.spring.methodOverrides;
 
 import com.spring.methodOverrides.lookup.FruitPlate;
 import org.springframework.context.ApplicationContext;

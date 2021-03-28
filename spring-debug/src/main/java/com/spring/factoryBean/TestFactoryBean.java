@@ -1,6 +1,5 @@
-package com.spring.test;
+package com.spring.factoryBean;
 
-import com.spring.factoryBean.MyFactoryBean;
 import com.spring.supplier.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

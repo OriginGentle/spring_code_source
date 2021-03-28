@@ -1,7 +1,6 @@
-package com.spring.test;
+package com.spring.selfEditor;
 
 import com.spring.extend.MyClassPathXmlApplicationContext;
-import com.spring.selfEditor.Customer;
 
 /**
  * @Author ycb

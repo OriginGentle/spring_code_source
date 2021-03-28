@@ -16,7 +16,7 @@ public class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationCon
 
 	@Override
 	protected void initPropertySources() {
-		System.out.println("扩展initPropertySources()方法");
+		System.out.println("扩展initPropertySources()方法======MyClassPathXmlApplicationContext");
 		getEnvironment().setRequiredProperties("username");
 		getEnvironment().validateRequiredProperties();
 	}
@@ -31,6 +31,6 @@ public class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationCon
 
 	@Override
 	protected void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
-		System.out.println("扩展实现postProcessBeanFactory方法");
+		System.out.println("扩展实现postProcessBeanFactory方法======MyClassPathXmlApplicationContext");
 	}
 }

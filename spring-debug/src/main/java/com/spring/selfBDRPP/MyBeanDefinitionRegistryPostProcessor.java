@@ -15,12 +15,12 @@ public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegi
 
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-		System.out.println("执行postProcessBeanFactory方法====");
+		System.out.println("执行postProcessBeanFactory方法====MyBeanDefinitionRegistryPostProcessor");
 	}
 
 	@Override
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-		System.out.println("执行postProcessBeanDefinitionRegistry方法===");
+		System.out.println("执行postProcessBeanDefinitionRegistry方法===MyBeanDefinitionRegistryPostProcessor");
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.rootBeanDefinition(MySelfBeanDefinitionRegistryPostProcessor.class);
 		builder.addPropertyValue("name", "张三");
 		registry.registerBeanDefinition("peter", builder.getBeanDefinition());

@@ -19,6 +19,7 @@
 	</bean>
 
 	<bean class="com.spring.extend.MyBeanFactoryPostProcessor"></bean>
+
 	<bean class="com.spring.selfBDRPP.MyBeanDefinitionRegistryPostProcessor"></bean>
 
 <!--	<bean id="studentConverter" class="com.spring.selfConverter.StudentConverter"></bean>-->
