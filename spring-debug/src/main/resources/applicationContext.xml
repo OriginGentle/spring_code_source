@@ -9,7 +9,7 @@
 
 <!--	<peter:user id="peter" username="ycb"  email="ycb@qq.com" password="root"></peter:user>-->
 
-<!--	<context:component-scan base-package="com.spring.config,com.spring.shouldSkip"></context:component-scan>-->
+	<context:component-scan base-package="com.spring.config,com.spring.shouldSkip"></context:component-scan>
 
 <!--	<context:property-placeholder location="classpath:db.properties"></context:property-placeholder>-->
 
