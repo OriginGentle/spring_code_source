@@ -14,7 +14,7 @@
 		<property name="age" value="21"></property>
 	</bean>
 
-	<bean class="com.spring.extend.MyBeanFactoryPostProcessor"></bean>
+	<bean class="com.spring.beanFactoryPostProcessor.MyBeanFactoryPostProcessor"></bean>
 
 	<bean class="com.spring.selfBDRPP.MyBeanDefinitionRegistryPostProcessor"></bean>
 

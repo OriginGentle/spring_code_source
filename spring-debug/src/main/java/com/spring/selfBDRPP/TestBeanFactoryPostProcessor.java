@@ -1,4 +1,4 @@
-package com.spring.test;
+package com.spring.selfBDRPP;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
