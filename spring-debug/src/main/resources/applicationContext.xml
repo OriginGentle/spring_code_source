@@ -7,7 +7,7 @@
 
 	<context:component-scan base-package="com.spring.config,com.spring.shouldSkip"></context:component-scan>
 
-	<!--	<context:property-placeholder location="classpath:db.properties"></context:property-placeholder>-->
+	<context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
 
 	<bean id="user" class="com.spring.entity.User">
 		<property name="name" value="peter"></property>

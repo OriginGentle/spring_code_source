@@ -8,6 +8,6 @@ import com.spring.extend.MyClassPathXmlApplicationContext;
  */
 public class TestApplicationContext {
 	public static void main(String[] args) {
-		MyClassPathXmlApplicationContext context = new MyClassPathXmlApplicationContext("selfTag.xml");
+		MyClassPathXmlApplicationContext context = new MyClassPathXmlApplicationContext("applicationContext.xml");
 	}
 }
