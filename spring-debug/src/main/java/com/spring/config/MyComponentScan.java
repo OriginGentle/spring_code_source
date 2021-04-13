@@ -9,10 +9,10 @@ import org.springframework.core.annotation.Order;
  * @Date 2021/3/20-14:59
  */
 @Configuration
-@ComponentScan("com.spring.selfTag")
+@ComponentScan("com.spring.shouldSkip")
 public class MyComponentScan {
 
-	@ComponentScan("com.spring.selfTag")
+	@ComponentScan("com.spring.shouldSkip")
 	@Configuration
 	@Order(1)
 	class InnerClass{

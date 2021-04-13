@@ -1,5 +1,6 @@
 package com.spring.extend;
 
+import com.spring.beanFactoryPostProcessor.MyBeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -23,11 +24,12 @@ public class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationCon
 
 	@Override
 	protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
-		super.setAllowBeanDefinitionOverriding(false);
-		super.setAllowCircularReferences(false);
-//		super.addBeanFactoryPostProcessor(new MyBeanFactoryPostProcessor());
+//		super.setAllowBeanDefinitionOverriding(false);
+//		super.setAllowCircularReferences(false);
+		super.addBeanFactoryPostProcessor(new MyBeanFactoryPostProcessor());
 		super.customizeBeanFactory(beanFactory);
 	}
+
 
 	@Override
 	protected void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
