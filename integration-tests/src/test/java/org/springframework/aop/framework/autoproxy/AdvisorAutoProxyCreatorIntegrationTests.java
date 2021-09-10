@@ -16,14 +16,7 @@
 
 package org.springframework.aop.framework.autoproxy;
 
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.List;
-
-import javax.servlet.ServletException;
-
 import org.junit.jupiter.api.Test;
-
 import org.springframework.aop.support.AopUtils;
 import org.springframework.aop.support.StaticMethodMatcherPointcutAdvisor;
 import org.springframework.aop.testfixture.advice.CountingBeforeAdvice;
@@ -37,6 +30,11 @@ import org.springframework.lang.Nullable;
 import org.springframework.transaction.NoTransactionException;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 import org.springframework.transaction.testfixture.CallCountingTransactionManager;
+
+import javax.servlet.ServletException;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
