@@ -16,56 +16,23 @@
 
 package org.springframework.beans.factory.xml;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeanMetadataAttribute;
+import org.springframework.beans.BeanMetadataAttributeAccessor;
+import org.springframework.beans.PropertyValue;
+import org.springframework.beans.factory.config.*;
+import org.springframework.beans.factory.parsing.*;
+import org.springframework.beans.factory.support.*;
+import org.springframework.lang.Nullable;
+import org.springframework.util.*;
+import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import org.springframework.beans.BeanMetadataAttribute;
-import org.springframework.beans.BeanMetadataAttributeAccessor;
-import org.springframework.beans.PropertyValue;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.config.ConstructorArgumentValues;
-import org.springframework.beans.factory.config.RuntimeBeanNameReference;
-import org.springframework.beans.factory.config.RuntimeBeanReference;
-import org.springframework.beans.factory.config.TypedStringValue;
-import org.springframework.beans.factory.parsing.BeanEntry;
-import org.springframework.beans.factory.parsing.ConstructorArgumentEntry;
-import org.springframework.beans.factory.parsing.ParseState;
-import org.springframework.beans.factory.parsing.PropertyEntry;
-import org.springframework.beans.factory.parsing.QualifierEntry;
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.AutowireCandidateQualifier;
-import org.springframework.beans.factory.support.BeanDefinitionDefaults;
-import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
-import org.springframework.beans.factory.support.LookupOverride;
-import org.springframework.beans.factory.support.ManagedArray;
-import org.springframework.beans.factory.support.ManagedList;
-import org.springframework.beans.factory.support.ManagedMap;
-import org.springframework.beans.factory.support.ManagedProperties;
-import org.springframework.beans.factory.support.ManagedSet;
-import org.springframework.beans.factory.support.MethodOverrides;
-import org.springframework.beans.factory.support.ReplaceOverride;
-import org.springframework.lang.Nullable;
-import org.springframework.util.Assert;
-import org.springframework.util.ClassUtils;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.ObjectUtils;
-import org.springframework.util.PatternMatchUtils;
-import org.springframework.util.StringUtils;
-import org.springframework.util.xml.DomUtils;
+import java.util.*;
 
 /**
  * 定义解析Element的各种方法
@@ -520,7 +487,7 @@ public class BeanDefinitionParserDelegate {
 		}
 
 		try {
-			// 创建装在bean信息的AbstractBeanDefinition对象，实际的实现是GenericBeanDefinition
+			// 创建封装bean信息的AbstractBeanDefinition对象，实际的实现是GenericBeanDefinition
 			AbstractBeanDefinition bd = createBeanDefinition(className, parent);
 
 			// 解析bean标签的各种其他属性
@@ -582,7 +549,7 @@ public class BeanDefinitionParserDelegate {
 		}
 		else if (containingBean != null) {
 			// Take default from containing bean in case of an inner bean definition.
-			// 在嵌入beanDefinitiono情况下且没有单独指定scope属性则使用父类默认的属性
+			// 在嵌入beanDefinitions情况下且没有单独指定scope属性则使用父类默认的属性
 			bd.setScope(containingBean.getScope());
 		}
 
