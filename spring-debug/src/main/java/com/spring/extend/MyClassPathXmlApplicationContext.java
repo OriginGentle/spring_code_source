@@ -1,6 +1,6 @@
 package com.spring.extend;
 
-import com.spring.beanFactoryPostProcessor.MyBeanFactoryPostProcessor;
+import com.spring.selfBeanFactoryPostProcessor.MyBeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

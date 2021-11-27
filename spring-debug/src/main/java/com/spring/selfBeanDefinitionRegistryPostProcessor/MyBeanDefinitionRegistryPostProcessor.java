@@ -1,4 +1,4 @@
-package com.spring.selfBDRPP;
+package com.spring.selfBeanDefinitionRegistryPostProcessor;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;

@@ -1,4 +1,4 @@
-package com.spring.selfBDRPP;
+package com.spring.selfBeanDefinitionRegistryPostProcessor;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

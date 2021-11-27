@@ -14,9 +14,9 @@
 		<property name="age" value="21"></property>
 	</bean>
 
-<!--	<bean class="com.spring.beanFactoryPostProcessor.MyBeanFactoryPostProcessor"></bean>-->
+<!--	<bean class="com.spring.selfBeanFactoryPostProcessor.MyBeanFactoryPostProcessor"></bean>-->
 
-	<bean class="com.spring.selfBDRPP.MyBeanDefinitionRegistryPostProcessor"></bean>
+	<bean class="com.spring.selfBeanDefinitionRegistryPostProcessor.MyBeanDefinitionRegistryPostProcessor"></bean>
 
 	<!--	<bean id="studentConverter" class="com.spring.selfConverter.StudentConverter"></bean>-->
 	<!--	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">-->

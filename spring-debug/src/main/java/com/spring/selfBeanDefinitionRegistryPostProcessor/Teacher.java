@@ -1,4 +1,4 @@
-package com.spring.selfBDRPP;
+package com.spring.selfBeanDefinitionRegistryPostProcessor;
 
 /**
  * @Author ycb

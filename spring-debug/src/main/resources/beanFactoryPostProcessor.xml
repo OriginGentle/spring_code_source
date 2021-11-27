@@ -6,8 +6,8 @@
 
 	<context:component-scan base-package="com.spring.config,com.spring.shouldSkip"></context:component-scan>
 
-	<bean class="com.spring.beanFactoryPostProcessor.MyBeanFactoryPostProcessor"></bean>
+	<bean class="com.spring.selfBeanFactoryPostProcessor.MyBeanFactoryPostProcessor"></bean>
 
-	<bean class="com.spring.selfBDRPP.MyBeanDefinitionRegistryPostProcessor"></bean>
+	<bean class="com.spring.selfBeanDefinitionRegistryPostProcessor.MyBeanDefinitionRegistryPostProcessor"></bean>
 
 </beans>
