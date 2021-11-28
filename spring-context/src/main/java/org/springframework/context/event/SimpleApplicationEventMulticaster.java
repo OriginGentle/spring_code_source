@@ -16,17 +16,16 @@
 
 package org.springframework.context.event;
 
-import java.util.concurrent.Executor;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.ResolvableType;
 import org.springframework.lang.Nullable;
 import org.springframework.util.ErrorHandler;
+
+import java.util.concurrent.Executor;
 
 /**
  * Simple implementation of the {@link ApplicationEventMulticaster} interface.
@@ -211,11 +210,11 @@ public class SimpleApplicationEventMulticaster extends AbstractApplicationEventM
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void doInvokeListener(ApplicationListener listener, ApplicationEvent event) {
 		try {
-			//回调listener的onApplicationEvent方法，传入event
+			// 回调listener的onApplicationEvent方法，传入event
 			listener.onApplicationEvent(event);
 		}
 		catch (ClassCastException ex) {
-			//获取异常信息
+			// 获取异常信息
 			String msg = ex.getMessage();
 			if (msg == null || matchesClassCastMessage(msg, event.getClass())) {
 				// Possibly a lambda-defined listener which we could not resolve the generic event type for
@@ -226,7 +225,7 @@ public class SimpleApplicationEventMulticaster extends AbstractApplicationEventM
 				}
 			}
 			else {
-				//抛出异常
+				// 抛出异常
 				throw ex;
 			}
 		}
