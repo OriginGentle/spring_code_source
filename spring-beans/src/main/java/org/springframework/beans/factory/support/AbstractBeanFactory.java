@@ -263,7 +263,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			throws BeansException {
 
 		/*
-		 * 提取对应的beanName，很多同学可能会认为此处直接使用即可，为什么还要进行转换呢，原因在于当bean对象实现FactoryBean接口之后就会变成&beanName，同时如果存在别名，也需要把别名进行转换*/
+		 * 提取对应的beanName，此处直接使用即可，为什么还要进行转换呢？原因在于当bean对象实现FactoryBean接口之后就会变成 &beanName，同时如果存在别名，也需要把别名进行转换*/
 		String beanName = transformedBeanName(name);
 		Object bean;
 
@@ -283,7 +283,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 					logger.trace("Returning cached instance of singleton bean '" + beanName + "'");
 				}
 			}
-			// 返回对象的实例，很多同学会理解不了这句话存在的意义，当你实现了FactoryBean接口的对象，需要获取具体的对象的时候就需要此方法来进行获取了
+			// 返回对象的实例，如何理解这句话存在的意义？当你实现了FactoryBean接口的对象，需要获取具体的对象的时候就需要此方法来进行获取了
 			bean = getObjectForBeanInstance(sharedInstance, name, beanName, null);
 		}
 
@@ -1726,6 +1726,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		// Quick check on the concurrent map first, with minimal locking.
 		// 首先以最小的锁定快速检测并发映射
 		// 从bean名称映射到合并的RootBeanDefinition的集合中获取beanName对应的RootBeanDefinition
+		// 此缓存是在beanFactoryPostProcessor中添加的
 		RootBeanDefinition mbd = this.mergedBeanDefinitions.get(beanName);
 		// 如果mbd不为null 且 不需要重新合并定义
 		if (mbd != null && !mbd.stale) {
@@ -2509,7 +2510,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			// 如果是单例对象，则缓存从FactoryBean获得的对象、
 			// 如果mbd为null&&该BeanFactory包含beanName的BeanDefinition对象。
 			if (mbd == null && containsBeanDefinition(beanName)) {
-				//获取beanName合并后的本地RootBeanDefintiond对象
+				//获取beanName合并后的本地RootBeanDefinition对象
 				mbd = getMergedLocalBeanDefinition(beanName);
 			}
 			// 是否是'synthetic'标记：mbd不为null && 返回此bean定义是否是"synthetic"【一般是指只有AOP相关的prointCut配置或者
