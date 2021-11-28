@@ -4,7 +4,8 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="apple" class="com.spring.methodOverrides.lookup.Apple">
-		<property name="banana" ref="banana"></property>
+		<lookup-method name="getBanana" bean="banana"></lookup-method>
+<!--		<property name="banana" ref="banana"></property>-->
 	</bean>
 
 	<bean id="banana" class="com.spring.methodOverrides.lookup.Banana" scope="prototype"></bean>

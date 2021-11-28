@@ -2078,21 +2078,21 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		String className = mbd.getBeanClassName();
 		// 如果能成功获得配置的bean类名
 		if (className != null) {
-			//评估benaDefinition中包含的className,如果className是可解析表达式，会对其进行解析，否则直接返回className:
+			//评估beanDefinition中包含的className,如果className是可解析表达式，会对其进行解析，否则直接返回className:
 			Object evaluated = evaluateBeanDefinitionString(className, mbd);
 			// 判断className是否等于计算出的表达式的结果，如果不等于，那么判断evaluated的类型
 			if (!className.equals(evaluated)) {
 				// A dynamically resolved expression, supported as of 4.2...
 				// 如果evaluated属于Class实例
 				if (evaluated instanceof Class) {
-					// 强转evaluatedw为Class对象并返回出去
+					// 强转evaluated为Class对象并返回出去
 					return (Class<?>) evaluated;
 				}
 				// 如果evaluated属于String实例
 				else if (evaluated instanceof String) {
 					// 将evaluated作为className的值
 					className = (String) evaluated;
-					// 标记mdb的配置的bean类名需要重新被dynameicLoader加载
+					// 标记mdb的配置的bean类名需要重新被dynamicLoader加载
 					freshResolve = true;
 				}
 				else {
@@ -2127,7 +2127,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 
 		// Resolve regularly, caching the result in the BeanDefinition...
 		// 定期解析，将结果缓存在BeanDefinition中...
-		// 使用classLoader加载当前BeanDefinitiond对象所配置的Bean类名的Class对象（每次调用都会重新加载,可通过
+		// 使用classLoader加载当前BeanDefinition对象所配置的Bean类名的Class对象（每次调用都会重新加载,可通过
 		// AbstractBeanDefinition#getBeanClass 获取缓存）
 		return mbd.resolveBeanClass(beanClassLoader);
 	}
@@ -2508,7 +2508,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			FactoryBean<?> factory = (FactoryBean<?>) beanInstance;
 			// Caches object obtained from FactoryBean if it is a singleton.
 			// 如果是单例对象，则缓存从FactoryBean获得的对象、
-			// 如果mbd为null&&该BeanFactory包含beanName的BeanDefinition对象。
+			// 如果mbd为null && 该BeanFactory包含beanName的BeanDefinition对象。
 			if (mbd == null && containsBeanDefinition(beanName)) {
 				//获取beanName合并后的本地RootBeanDefinition对象
 				mbd = getMergedLocalBeanDefinition(beanName);

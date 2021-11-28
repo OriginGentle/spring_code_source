@@ -214,7 +214,7 @@ public class CglibSubclassingInstantiationStrategy extends SimpleInstantiationSt
 
 		@Override
 		public int accept(Method method) {
-			// 根据beanDefinition的相关配置加载到MEthodOverrides集合中
+			// 根据beanDefinition的相关配置加载到MethodOverrides集合中
 			MethodOverride methodOverride = getBeanDefinition().getMethodOverrides().getOverride(method);
 			if (logger.isTraceEnabled()) {
 				logger.trace("MethodOverride for " + method + ": " + methodOverride);
