@@ -1301,7 +1301,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			// 新建一个DependencyObjectProvider的实例
 			return new DependencyObjectProvider(descriptor, requestingBeanName);
 		}
-		// javaxInjectProviderClass有可能导致空指针，不过一般情况下，我们引用Spirng包的时候都有引入该类以防止空旨在
+		// javaxInjectProviderClass有可能导致空指针，不过一般情况下，我们引用Spring包的时候都有引入该类以防止空指针
 		// 如果依赖类型是javax.inject.Provider类。
 		else if (javaxInjectProviderClass == descriptor.getDependencyType()) {
 
@@ -1337,43 +1337,43 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	public Object doResolveDependency(DependencyDescriptor descriptor, @Nullable String beanName,
 									  @Nullable Set<String> autowiredBeanNames, @Nullable TypeConverter typeConverter) throws BeansException {
 
-		//设置新得当前切入点对象，得到旧的当前切入点对象
+		// 设置新得当前切入点对象，得到旧的当前切入点对象
 		InjectionPoint previousInjectionPoint = ConstructorResolver.setCurrentInjectionPoint(descriptor);
 		try {
-			//尝试使用descriptor的快捷方法得到最近候选Bean对象
-			//resolveShortcut：解决针对给定工厂的这种依赖关系的快捷方式，例如，考虑一些预先解决的信息
-			//尝试调用该工厂解决这种依赖关系的快捷方式来获取beanName对应的bean对象,默认返回null
-			//获取针对该工厂的这种依赖关系的快捷解析最佳候选Bean对象
+			// 尝试使用descriptor的快捷方法得到最近候选Bean对象
+			// resolveShortcut：解决针对给定工厂的这种依赖关系的快捷方式，例如，考虑一些预先解决的信息
+			// 尝试调用该工厂解决这种依赖关系的快捷方式来获取beanName对应的bean对象,默认返回null
+			// 获取针对该工厂的这种依赖关系的快捷解析最佳候选Bean对象
 			Object shortcut = descriptor.resolveShortcut(this);
-			//如果shortcut不为null，返回该shortcut
+			// 如果shortcut不为null，返回该shortcut
 			if (shortcut != null) {
 				return shortcut;
 			}
 
-			//获取descriptor的依赖类型
+			// 获取descriptor的依赖类型
 			Class<?> type = descriptor.getDependencyType();
-			//尝试使用descriptor的默认值作为最近候选Bean对象
-			//使用此BeanFactory的自动装配候选解析器获取descriptor的默认值
+			// 尝试使用descriptor的默认值作为最近候选Bean对象
+			// 使用此BeanFactory的自动装配候选解析器获取descriptor的默认值
 			Object value = getAutowireCandidateResolver().getSuggestedValue(descriptor);
-			//如果默认值不为null
+			// 如果默认值不为null
 			if (value != null) {
-				//如果value是String类型
+				// 如果value是String类型
 				if (value instanceof String) {
-					//解析嵌套的值(如果value是表达式会解析出该表达式的值)
+					// 解析嵌套的值(如果value是表达式会解析出该表达式的值)
 					String strVal = resolveEmbeddedValue((String) value);
-					//获取beanName的合并后RootBeanDefinition
+					// 获取beanName的合并后RootBeanDefinition
 					BeanDefinition bd = (beanName != null && containsBean(beanName) ?
 							getMergedBeanDefinition(beanName) : null);
-					//评估bd中包含的value,如果strVal是可解析表达式，会对其进行解析.
+					// 评估bd中包含的value,如果strVal是可解析表达式，会对其进行解析.
 					value = evaluateBeanDefinitionString(strVal, bd);
 				}
-				//如果没有传入typeConverter,则引用工厂的类型转换器
+				// 如果没有传入typeConverter,则引用工厂的类型转换器
 				TypeConverter converter = (typeConverter != null ? typeConverter : getTypeConverter());
 				try {
-					//将value转换为type的实例对象
+					// 将value转换为type的实例对象
 					return converter.convertIfNecessary(value, type, descriptor.getTypeDescriptor());
 				}
-				//捕捉 不支持操作异常
+				// 捕捉 不支持操作异常
 				catch (UnsupportedOperationException ex) {
 					// A custom TypeConverter which does not support TypeDescriptor resolution...
 					return (descriptor.getField() != null ?
@@ -1382,11 +1382,11 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 				}
 			}
 
-			//尝试针对desciptor所包装的对象类型是[stream,数组,Collection类型且对象类型是接口,Map]的情况，进行解析与依赖类型匹配的候选Bean对象
-			//针对desciptor所包装的对象类型是[stream,数组,Collection类型且对象类型是接口,Map]的情况，进行解析与依赖类型匹配的 候选Bean对象，
+			// 尝试针对descriptor所包装的对象类型是[stream,数组,Collection类型且对象类型是接口,Map]的情况，进行解析与依赖类型匹配的候选Bean对象
+			// 针对descriptor所包装的对象类型是[stream,数组,Collection类型且对象类型是接口,Map]的情况，进行解析与依赖类型匹配的 候选Bean对象，
 			// 并将其封装成相应的依赖类型对象
 			Object multipleBeans = resolveMultipleBeans(descriptor, beanName, autowiredBeanNames, typeConverter);
-			//如果multpleBeans不为null
+			//如果multipleBeans不为null
 			if (multipleBeans != null) {
 				//将multipleBeans返回出去
 				return multipleBeans;
@@ -1432,48 +1432,48 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 						return null;
 					}
 				}
-				//获取autowiredBeanName对应的候选Bean对象
+				// 获取autowiredBeanName对应的候选Bean对象
 				instanceCandidate = matchingBeans.get(autowiredBeanName);
 			}
 			else {
 				// We have exactly one match.
-				//这个时候matchingBeans不会没有元素的，因为前面已经检查了
-				//获取machingBeans唯一的元素
+				// 这个时候matchingBeans不会没有元素的，因为前面已经检查了
+				// 获取matchingBeans唯一的元素
 				Map.Entry<String, Object> entry = matchingBeans.entrySet().iterator().next();
-				//让autowireBeanName引用该元素的候选bean名
+				// 让autowireBeanName引用该元素的候选bean名
 				autowiredBeanName = entry.getKey();
-				//让instanceCandidate引用该元素的候选bean对象
+				// 让instanceCandidate引用该元素的候选bean对象
 				instanceCandidate = entry.getValue();
 			}
 
-			//如果候选bean名不为null，
+			// 如果候选bean名不为null，
 			if (autowiredBeanNames != null) {
-				//将autowiredBeanName添加到autowiredBeanNames中，又添加一次
+				// 将autowiredBeanName添加到autowiredBeanNames中，又添加一次
 				autowiredBeanNames.add(autowiredBeanName);
 			}
-			//如果instanceCandidate是Class实例
+			// 如果instanceCandidate是Class实例
 			if (instanceCandidate instanceof Class) {
 				//让instanceCandidate引用 descriptor对autowiredBeanName解析为该工厂的Bean实例
 				instanceCandidate = descriptor.resolveCandidate(autowiredBeanName, type, this);
 			}
-			//定义一个result变量，用于存储最佳候选Bean对象
+			// 定义一个result变量，用于存储最佳候选Bean对象
 			Object result = instanceCandidate;
-			//如果reuslt是NullBean的实例
+			// 如果result是NullBean的实例
 			if (result instanceof NullBean) {
-				//如果descriptor需要注入
+				// 如果descriptor需要注入
 				if (isRequired(descriptor)) {
-					//抛出NoSuchBeanDefinitionException或BeanNotOfRequiredTypeException以解决不可 解决的依赖关系
+					// 抛出NoSuchBeanDefinitionException或BeanNotOfRequiredTypeException以解决不可 解决的依赖关系
 					raiseNoMatchingBeanFound(type, descriptor.getResolvableType(), descriptor);
 				}
-				//返回null，表示找不到最佳候选Bean对象
+				// 返回null，表示找不到最佳候选Bean对象
 				result = null;
 			}
-			//如果result不是type的实例
+			// 如果result不是type的实例
 			if (!ClassUtils.isAssignableValue(type, result)) {
-				//抛出Bean不是必需类型异常
+				// 抛出Bean不是必需类型异常
 				throw new BeanNotOfRequiredTypeException(autowiredBeanName, type, instanceCandidate.getClass());
 			}
-			//返回最佳候选Bean对象【result】
+			// 返回最佳候选Bean对象【result】
 			return result;
 		}
 		finally {
@@ -1483,7 +1483,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	}
 
 	/**
-	 * 针对desciptor所包装的对象类型是[stream,数组,Collection类型且对象类型是接口,Map]的情况，进行解析与依赖类型匹配的候选Bean对象，
+	 * 针对descriptor所包装的对象类型是[stream,数组,Collection类型且对象类型是接口,Map]的情况，进行解析与依赖类型匹配的候选Bean对象，
 	 * 并将其封装成相应的依赖类型对象
 	 * @param descriptor
 	 * @param beanName

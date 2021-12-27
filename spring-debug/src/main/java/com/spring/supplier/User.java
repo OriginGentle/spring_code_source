@@ -19,10 +19,4 @@ public class User {
         this.username = username;
     }
 
-//    @Override
-//    public String toString() {
-//        return "User{" +
-//                "username='" + username + '\'' +
-//                '}';
-//    }
 }

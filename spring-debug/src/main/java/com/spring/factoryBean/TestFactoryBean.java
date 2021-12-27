@@ -12,6 +12,7 @@ public class TestFactoryBean {
 
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("factoryBean.xml");
+
 		MyFactoryBean bean =(MyFactoryBean) context.getBean("&myFactoryBean");
 		System.out.println(bean);
 

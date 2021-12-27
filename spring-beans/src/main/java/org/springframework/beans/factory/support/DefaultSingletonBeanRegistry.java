@@ -208,7 +208,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 			this.singletonFactories.remove(beanName);
 			// 移除beanName在早期单例对象的高速缓存的数据(二级缓存)
 			this.earlySingletonObjects.remove(beanName);
-			// 将beanName添加到已注册的单例集中
+			// 将beanName添加到已注册的单例集合中
 			this.registeredSingletons.add(beanName);
 		}
 	}
@@ -635,7 +635,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 
 		//使用Bean依赖关系Map作为锁，保证线程安全
 		synchronized (this.dependenciesForBeanMap) {
-			//添加dependendtBeanName依赖于cannoicalName的映射关系到 存储 bean名到依赖于该bean名的bean名 的Map中
+			//添加dependentBeanName依赖于canonicalName的映射关系到 存储 bean名到依赖于该bean名的bean名 的Map中
 			Set<String> dependenciesForBean =
 					this.dependenciesForBeanMap.computeIfAbsent(dependentBeanName, k -> new LinkedHashSet<>(8));
 			dependenciesForBean.add(canonicalName);

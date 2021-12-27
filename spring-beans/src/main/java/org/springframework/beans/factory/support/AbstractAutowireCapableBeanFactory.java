@@ -488,23 +488,23 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	public Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName)
 			throws BeansException {
 
-		//初始化结果对象为result，默认引用existingBean
+		// 初始化结果对象为result，默认引用existingBean
 		Object result = existingBean;
-		//遍历该工厂创建的bean的BeanPostProcessors列表
+		// 遍历该工厂创建的bean的BeanPostProcessors列表
 		for (BeanPostProcessor processor : getBeanPostProcessors()) {
-			//回调BeanPostProcessor#postProcessAfterInitialization来对现有的bean实例进行包装
+			// 回调BeanPostProcessor#postProcessAfterInitialization来对现有的bean实例进行包装
 			Object current = processor.postProcessAfterInitialization(result, beanName);
-			//一般processor对不感兴趣的bean会回调直接返回result，使其能继续回调后续的BeanPostProcessor；
+			// 一般processor对不感兴趣的bean会回调直接返回result，使其能继续回调后续的BeanPostProcessor；
 			// 但有些processor会返回null来中断其后续的BeanPostProcessor
 			// 如果current为null
 			if (current == null) {
-				//直接返回result，中断其后续的BeanPostProcessor处理
+				// 直接返回result，中断其后续的BeanPostProcessor处理
 				return result;
 			}
-			//让result引用processor的返回结果,使其经过所有BeanPostProcess对象的后置处理的层层包装
+			// 让result引用processor的返回结果,使其经过所有BeanPostProcess对象的后置处理的层层包装
 			result = current;
 		}
-		//返回经过所有BeanPostProcess对象的后置处理的层层包装后的result
+		// 返回经过所有BeanPostProcess对象的后置处理的层层包装后的result
 		return result;
 	}
 
@@ -582,7 +582,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		try {
 			// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
-			// 给BeanPostProcessors一个机会来返回代理来替代真正的实例，应用实例化前的前置处理器,用户自定义动态代理的方式，针对于当前的被代理类需要经过标准的代理流程来创建对象
+			// 给BeanPostProcessors一个机会来返回代理来替代真正的实例，应用实例化前的前置处理器,
+			// 用户自定义动态代理的方式，针对于当前的被代理类需要经过标准的代理流程来创建对象
 			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
 			if (bean != null) {
 				return bean;
@@ -632,7 +633,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// Instantiate the bean.
 		// 这个beanWrapper是用来包装创建出来的bean对象
 		BeanWrapper instanceWrapper = null;
-		// 获取factoryBean实例缓存
+		// 根据beanDefinition判断是否为单例对象
 		if (mbd.isSingleton()) {
 			// 如果是单例对象，从factoryBean实例缓存中移除当前bean定义信息
 			instanceWrapper = this.factoryBeanInstanceCache.remove(beanName);
@@ -1380,7 +1381,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	 */
 	protected BeanWrapper createBeanInstance(String beanName, RootBeanDefinition mbd, @Nullable Object[] args) {
 		// Make sure bean class is actually resolved at this point.
-		// 确认需要创建的bean实例的类可以实例化
+		// 确认需要创建的bean实例的Class类型
 		Class<?> beanClass = resolveBeanClass(mbd, beanName);
 
 		// 确保class不为空，并且访问权限是public
@@ -1395,7 +1396,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			return obtainFromSupplier(instanceSupplier, beanName);
 		}
 
-		// 如果工厂方法不为空则使用工厂方法初始化策略
+		// 如果工厂方法不为空则使用工厂方法实例化策略
 		if (mbd.getFactoryMethodName() != null) {
 			return instantiateUsingFactoryMethod(beanName, mbd, args);
 		}
@@ -1411,7 +1412,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// 如果没有参数
 		if (args == null) {
 			synchronized (mbd.constructorArgumentLock) {
-				// 因为一个类可能由多个构造函数，所以需要根据配置文件中配置的参数或传入的参数来确定最终调用的构造函数。
+				// 因为一个类可能有多个构造函数，所以需要根据配置文件中配置的参数或传入的参数来确定最终调用的构造函数。
 				// 因为判断过程会比较，所以spring会将解析、确定好的构造函数缓存到BeanDefinition中的resolvedConstructorOrFactoryMethod字段中。
 				// 在下次创建相同时直接从RootBeanDefinition中的属性resolvedConstructorOrFactoryMethod缓存的值获取，避免再次解析
 				if (mbd.resolvedConstructorOrFactoryMethod != null) {
@@ -1474,7 +1475,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		// 获取原先创建的beanName
 		String outerBean = this.currentlyCreatedBean.get();
-		// 用当前作对做替换
+		// 用当前beanName做替换
 		this.currentlyCreatedBean.set(beanName);
 		try {
 			// 调用supplier的方法
@@ -2398,7 +2399,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 
 	/**
-	 * 应用所有已注册BeanPostProcessor的postProcessAfterInitialization回调,使它们有机会对FactoryBeans获得的对象进行后处理(例如,自动代理它们)
+	 * 应用所有已注册BeanPostProcessor的postProcessAfterInitialization回调,使它们有机会对FactoryBeans获得的对象进行后置处理(例如,自动代理它们)
 	 * <p>
 	 * Applies the {@code postProcessAfterInitialization} callback of all
 	 * registered BeanPostProcessors, giving them a chance to post-process the
@@ -2408,7 +2409,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	 */
 	@Override
 	protected Object postProcessObjectFromFactoryBean(Object object, String beanName) {
-		// 初始化后的后处理
+		// 初始化后的后置处理
 		return applyBeanPostProcessorsAfterInitialization(object, beanName);
 	}
 
