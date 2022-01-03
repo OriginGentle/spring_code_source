@@ -1305,8 +1305,8 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		// 如果依赖类型是javax.inject.Provider类。
 		else if (javaxInjectProviderClass == descriptor.getDependencyType()) {
 
-			// Jse330Provider:javax.inject.Provider实现类.与DependencyObjectProvoid作用一样，也是用于延迟解析依赖
-			// 项，但它是使用javax.inject.Provider作为依赖 对象，以减少与Springd耦合
+			// Jse330Provider:javax.inject.Provider实现类.与DependencyObjectProvider作用一样，也是用于延迟解析依赖
+			// 项，但它是使用javax.inject.Provider作为依赖 对象，以减少与Spring的耦合
 			// 新建一个专门用于构建javax.inject.Provider对象的工厂来构建创建Jse330Provider对象
 			return new Jsr330Factory().createDependencyProvider(descriptor, requestingBeanName);
 		}
@@ -1382,42 +1382,42 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 				}
 			}
 
-			// 尝试针对descriptor所包装的对象类型是[stream,数组,Collection类型且对象类型是接口,Map]的情况，进行解析与依赖类型匹配的候选Bean对象
-			// 针对descriptor所包装的对象类型是[stream,数组,Collection类型且对象类型是接口,Map]的情况，进行解析与依赖类型匹配的 候选Bean对象，
+			// 尝试针对descriptor所包装的对象类型是 [stream,数组,Collection类型且对象类型是接口,Map] 的情况，进行解析与依赖类型匹配的候选Bean对象
+			// 针对descriptor所包装的对象类型是 [stream,数组,Collection类型且对象类型是接口,Map] 的情况，进行解析与依赖类型匹配的 候选Bean对象，
 			// 并将其封装成相应的依赖类型对象
 			Object multipleBeans = resolveMultipleBeans(descriptor, beanName, autowiredBeanNames, typeConverter);
-			//如果multipleBeans不为null
+			// 如果multipleBeans不为null
 			if (multipleBeans != null) {
-				//将multipleBeans返回出去
+				// 将multipleBeans返回出去
 				return multipleBeans;
 			}
 
-			//尝试与type匹配的唯一候选bean对象
-			//查找与type匹配的候选bean对象,构建成Map，key=bean名,val=Bean对象
+			// 尝试与type匹配的唯一候选bean对象
+			// 查找与type匹配的候选bean对象,构建成Map，key=bean名,val=Bean对象
 			Map<String, Object> matchingBeans = findAutowireCandidates(beanName, type, descriptor);
-			//如果没有候选bean对象
+			// 如果没有候选bean对象
 			if (matchingBeans.isEmpty()) {
-				//如果descriptor需要注入
+				// 如果descriptor需要注入
 				if (isRequired(descriptor)) {
-					//抛出NoSuchBeanDefinitionException或BeanNotOfRequiredTypeException以解决不可 解决的依赖关系
+					// 抛出NoSuchBeanDefinitionException或BeanNotOfRequiredTypeException以解决不可 解决的依赖关系
 					raiseNoMatchingBeanFound(type, descriptor.getResolvableType(), descriptor);
 				}
-				//返回null，表示么有找到候选Bean对象
+				// 返回null，表示么有找到候选Bean对象
 				return null;
 			}
 
-			//定义用于存储唯一的候选Bean名变量
+			// 定义用于存储唯一的候选Bean名变量
 			String autowiredBeanName;
-			//定义用于存储唯一的候选Bean对象变量
+			// 定义用于存储唯一的候选Bean对象变量
 			Object instanceCandidate;
 
-			//如果候选Bean对象Map不止有一个
+			// 如果候选Bean对象Map不止有一个
 			if (matchingBeans.size() > 1) {
-				//确定candidates中可以自动注入的最佳候选Bean名称
+				// 确定candidates中可以自动注入的最佳候选Bean名称
 				autowiredBeanName = determineAutowireCandidate(matchingBeans, descriptor);
-				//如果autowiredBeanName为null
+				// 如果autowiredBeanName为null
 				if (autowiredBeanName == null) {
-					//descriptor需要注入 或者 type不是数组/集合类型
+					// descriptor需要注入 或者 type不是数组/集合类型
 					if (isRequired(descriptor) || !indicatesMultipleBeans(type)) {
 						//让descriptor尝试选择其中一个实例，默认实现是抛出NoUniqueBeanDefinitionException.
 						return descriptor.resolveNotUnique(descriptor.getResolvableType(), matchingBeans);
@@ -1477,7 +1477,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			return result;
 		}
 		finally {
-			//设置上一个切入点对象
+			// 设置上一个切入点对象
 			ConstructorResolver.setCurrentInjectionPoint(previousInjectionPoint);
 		}
 	}

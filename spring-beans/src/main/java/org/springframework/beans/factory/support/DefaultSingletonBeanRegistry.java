@@ -633,9 +633,9 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 			}
 		}
 
-		//使用Bean依赖关系Map作为锁，保证线程安全
+		// 使用Bean依赖关系Map作为锁，保证线程安全
 		synchronized (this.dependenciesForBeanMap) {
-			//添加dependentBeanName依赖于canonicalName的映射关系到 存储 bean名到依赖于该bean名的bean名 的Map中
+			// 添加dependentBeanName依赖于canonicalName的映射关系到 存储 bean名到依赖于该bean名的bean名 的Map中
 			Set<String> dependenciesForBean =
 					this.dependenciesForBeanMap.computeIfAbsent(dependentBeanName, k -> new LinkedHashSet<>(8));
 			dependenciesForBean.add(canonicalName);
