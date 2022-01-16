@@ -16,20 +16,22 @@
 
 package org.springframework.beans.factory.parsing;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
+ * 复合的组件定义类
+ * <p>
  * {@link ComponentDefinition} implementation that holds one or more nested
  * {@link ComponentDefinition} instances, aggregating them into a named group
  * of components.
  *
  * @author Juergen Hoeller
- * @since 2.0.1
  * @see #getNestedComponents()
+ * @since 2.0.1
  */
 public class CompositeComponentDefinition extends AbstractComponentDefinition {
 
@@ -43,7 +45,8 @@ public class CompositeComponentDefinition extends AbstractComponentDefinition {
 
 	/**
 	 * Create a new CompositeComponentDefinition.
-	 * @param name the name of the composite component
+	 *
+	 * @param name   the name of the composite component
 	 * @param source the source element that defines the root of the composite component
 	 */
 	public CompositeComponentDefinition(String name, @Nullable Object source) {
@@ -67,6 +70,7 @@ public class CompositeComponentDefinition extends AbstractComponentDefinition {
 
 	/**
 	 * Add the given component as nested element of this composite component.
+	 *
 	 * @param component the nested component to add
 	 */
 	public void addNestedComponent(ComponentDefinition component) {
@@ -76,6 +80,7 @@ public class CompositeComponentDefinition extends AbstractComponentDefinition {
 
 	/**
 	 * Return the nested components that this composite component holds.
+	 *
 	 * @return the array of nested components, or an empty array if none
 	 */
 	public ComponentDefinition[] getNestedComponents() {

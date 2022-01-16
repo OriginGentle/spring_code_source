@@ -16,17 +16,19 @@
 
 package org.springframework.aop.aspectj;
 
-import java.io.Serializable;
-import java.lang.reflect.Method;
-
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.weaver.tools.JoinPointMatch;
-
 import org.springframework.aop.ProxyMethodInvocation;
 
+import java.io.Serializable;
+import java.lang.reflect.Method;
+
 /**
+ * 使用AspectJ Around注解的后置通知类型。
+ * 实现了MethodInterceptor接口。继承了AbstractAspectJAdvice
+ *
  * Spring AOP around advice (MethodInterceptor) that wraps
  * an AspectJ advice method. Exposes ProceedingJoinPoint.
  *

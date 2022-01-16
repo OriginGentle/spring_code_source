@@ -16,17 +16,20 @@
 
 package org.springframework.aop.aspectj;
 
-import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
-
 import org.springframework.aop.AfterAdvice;
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.TypeUtils;
 
+import java.io.Serializable;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+
 /**
+ * 使用AspectJ AfterReturning注解的后置通知类型。
+ * 实现了AfterReturningAdvice、AfterAdvice接口。继承了AbstractAspectJAdvice
+ *
  * Spring AOP advice wrapping an AspectJ after-returning advice method.
  *
  * @author Rod Johnson
