@@ -118,10 +118,8 @@ class ConstructorResolver {
 		if (explicitArgs != null) {
 			//让argsToUse引用explicitArgs
 			argsToUse = explicitArgs;
-		}
-		// 没有传入参数的话就走else
-		else {
-			//声明一个要解析的参数值数组，默认为null
+		} else { // 没有传入参数的话就走else
+			// 声明一个要解析的参数值数组，默认为null
 			Object[] argsToResolve = null;
 			synchronized (mbd.constructorArgumentLock) {
 				// 获取BeanDefinition中解析完成的构造函数
@@ -201,7 +199,7 @@ class ConstructorResolver {
 			int minNrOfArgs;
 			// 如果传入了参与构造函数实例化的参数值，那么参数的数量即为最小参数个数
 			if (explicitArgs != null) {
-				//minNrOfArgs引用explitArgs的数组长度
+				//minNrOfArgs引用explicitArgs的数组长度
 				minNrOfArgs = explicitArgs.length;
 			} else {
 				// 提取配置文件中的配置的构造函数参数
@@ -268,10 +266,10 @@ class ConstructorResolver {
 						// 吞下并尝试下一个重载的构造函数
 						// 如果cause为null
 						if (causes == null) {
-							//对cause进行实例化成LinkedList对象
+							// 对cause进行实例化成LinkedList对象
 							causes = new LinkedList<>();
 						}
-						//将ex添加到causes中
+						// 将ex添加到causes中
 						causes.add(ex);
 						continue;
 					}

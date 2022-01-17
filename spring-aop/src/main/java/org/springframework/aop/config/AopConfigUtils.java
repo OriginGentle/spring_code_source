@@ -31,7 +31,7 @@ import java.util.List;
 
 /**
  * AOP配置工具类,主要是向Spring容器中注入可以生成Advisor和创建代理对象的bean
- * <p>
+ *
  * Utility class for handling registration of AOP auto-proxy creators.
  *
  * <p>Only a single auto-proxy creator should be registered yet multiple concrete
@@ -42,8 +42,8 @@ import java.util.List;
  * @author Rob Harrop
  * @author Juergen Hoeller
  * @author Mark Fisher
- * @see AopNamespaceUtils
  * @since 2.5
+ * @see AopNamespaceUtils
  */
 public abstract class AopConfigUtils {
 
@@ -159,4 +159,5 @@ public abstract class AopConfigUtils {
 		throw new IllegalArgumentException(
 				"Class name [" + className + "] is not a known auto-proxy creator class");
 	}
+
 }

@@ -517,7 +517,7 @@ class BeanDefinitionValueResolver {
 			}
 			// 如果innerBean是NullBean实例
 			if (innerBean instanceof NullBean) {
-				//将innerBean设置为null
+				// 将innerBean设置为null
 				innerBean = null;
 			}
 			// 返回actualInnerBeanName的Bean对象【innerBean】

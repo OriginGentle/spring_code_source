@@ -16,14 +16,13 @@
 
 package org.springframework.aop.support;
 
-import java.io.Serializable;
-
 import org.aopalliance.aop.Advice;
-
 import org.springframework.aop.PointcutAdvisor;
 import org.springframework.core.Ordered;
 import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
+
+import java.io.Serializable;
 
 /**
  * Abstract base class for {@link org.springframework.aop.PointcutAdvisor}
@@ -42,6 +41,7 @@ public abstract class AbstractPointcutAdvisor implements PointcutAdvisor, Ordere
 	private Integer order;
 
 
+	// 指定order
 	public void setOrder(int order) {
 		this.order = order;
 	}
@@ -51,10 +51,12 @@ public abstract class AbstractPointcutAdvisor implements PointcutAdvisor, Ordere
 		if (this.order != null) {
 			return this.order;
 		}
+		// 若调用者没有指定Order，那就拿advice的order为准（若有），否则LOWEST_PRECEDENCE表示最后执行
 		Advice advice = getAdvice();
 		if (advice instanceof Ordered) {
 			return ((Ordered) advice).getOrder();
 		}
+		// Spring还没有使用该属性 永远返回true了
 		return Ordered.LOWEST_PRECEDENCE;
 	}
 
