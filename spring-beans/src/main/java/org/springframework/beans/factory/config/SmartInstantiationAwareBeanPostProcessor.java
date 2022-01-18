@@ -22,6 +22,8 @@ import org.springframework.lang.Nullable;
 import java.lang.reflect.Constructor;
 
 /**
+ * 继承自InstantiationAwareBeanPostProcessor接口，增加了三个额外处理的方法，由spring内部使用
+ *
  * Extension of the {@link InstantiationAwareBeanPostProcessor} interface,
  * adding a callback for predicting the eventual type of a processed bean.
  *
@@ -35,9 +37,11 @@ import java.lang.reflect.Constructor;
  * @since 2.0.3
  * @see InstantiationAwareBeanPostProcessorAdapter
  */
-public interface SmartInstantiationAwareBeanPostProcessor extends InstantiationAwareBeanPostProcessor { // 继承自InstantiationAwareBeanPostProcessor接口，增加了三个额外处理的方法，由spring内部使用
+public interface SmartInstantiationAwareBeanPostProcessor extends InstantiationAwareBeanPostProcessor {
 
 	/**
+	 * 预测bean的类型，主要是在bean还没有创建前我们需要获取bean的类型
+	 *
 	 * Predict the type of the bean to be eventually returned from this
 	 * processor's {@link #postProcessBeforeInstantiation} callback.
 	 * <p>The default implementation returns {@code null}.
@@ -47,11 +51,13 @@ public interface SmartInstantiationAwareBeanPostProcessor extends InstantiationA
 	 * @throws org.springframework.beans.BeansException in case of errors
 	 */
 	@Nullable
-	default Class<?> predictBeanType(Class<?> beanClass, String beanName) throws BeansException { // 预测bean的类型，主要是在bean还没有创建前我们需要获取bean的类型
+	default Class<?> predictBeanType(Class<?> beanClass, String beanName) throws BeansException {
 		return null;
 	}
 
 	/**
+	 * 完成对构造函数的解析和推断
+	 *
 	 * Determine the candidate constructors to use for the given bean.
 	 * <p>The default implementation returns {@code null}.
 	 * @param beanClass the raw class of the bean (never {@code null})
@@ -61,12 +67,14 @@ public interface SmartInstantiationAwareBeanPostProcessor extends InstantiationA
 	 */
 	@Nullable
 	default Constructor<?>[] determineCandidateConstructors(Class<?> beanClass, String beanName)
-			throws BeansException { // 完成对构造函数的解析和推断
+			throws BeansException {
 
 		return null;
 	}
 
 	/**
+	 * 解决循环依赖问题，通过此方法提前暴露一个合格的对象
+	 *
 	 * Obtain a reference for early access to the specified bean,
 	 * typically for the purpose of resolving a circular reference.
 	 * <p>This callback gives post-processors a chance to expose a wrapper
@@ -87,7 +95,7 @@ public interface SmartInstantiationAwareBeanPostProcessor extends InstantiationA
 	 * (typically with the passed-in bean instance as default)
 	 * @throws org.springframework.beans.BeansException in case of errors
 	 */
-	default Object getEarlyBeanReference(Object bean, String beanName) throws BeansException { // 解决循环依赖问题，通过此方法提前暴露一个合格的对象
+	default Object getEarlyBeanReference(Object bean, String beanName) throws BeansException {
 		return bean;
 	}
 
