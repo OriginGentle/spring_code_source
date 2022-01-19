@@ -16,17 +16,19 @@
 
 package org.springframework.aop.interceptor;
 
-import java.io.Serializable;
-
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-
 import org.springframework.aop.Advisor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.core.PriorityOrdered;
 
+import java.io.Serializable;
+
 /**
+ * ExposeInvocationInterceptor就是用来传递MethodInvocation的。
+ * 在后续的任何下调用链环节，只要需要用到当前的MethodInvocation就通过ExposeInvocationInterceptor.currentInvocation()静态方法获得
+ *
  * Interceptor that exposes the current {@link org.aopalliance.intercept.MethodInvocation}
  * as a thread-local object. We occasionally need to do this; for example, when a pointcut
  * (e.g. an AspectJ expression pointcut) needs to know the full invocation context.
@@ -62,6 +64,8 @@ public final class ExposeInvocationInterceptor implements MethodInterceptor, Pri
 
 
 	/**
+	 * 此处是继续调用ReflectiveMethodInvocation的proceed方法来进行递归调用
+	 *
 	 * Return the AOP Alliance MethodInvocation object associated with the current invocation.
 	 * @return the invocation object associated with the current invocation
 	 * @throws IllegalStateException if there is no AOP invocation in progress,
@@ -72,10 +76,10 @@ public final class ExposeInvocationInterceptor implements MethodInterceptor, Pri
 		if (mi == null) {
 			throw new IllegalStateException(
 					"No MethodInvocation found: Check that an AOP invocation is in progress and that the " +
-					"ExposeInvocationInterceptor is upfront in the interceptor chain. Specifically, note that " +
-					"advices with order HIGHEST_PRECEDENCE will execute before ExposeInvocationInterceptor! " +
-					"In addition, ExposeInvocationInterceptor and ExposeInvocationInterceptor.currentInvocation() " +
-					"must be invoked from the same thread.");
+							"ExposeInvocationInterceptor is upfront in the interceptor chain. Specifically, note that " +
+							"advices with order HIGHEST_PRECEDENCE will execute before ExposeInvocationInterceptor! " +
+							"In addition, ExposeInvocationInterceptor and ExposeInvocationInterceptor.currentInvocation() " +
+							"must be invoked from the same thread.");
 		}
 		return mi;
 	}

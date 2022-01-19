@@ -16,8 +16,6 @@
 
 package org.springframework.aop.support.annotation;
 
-import java.lang.annotation.Annotation;
-
 import org.springframework.aop.ClassFilter;
 import org.springframework.aop.MethodMatcher;
 import org.springframework.aop.Pointcut;
@@ -25,7 +23,11 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
+import java.lang.annotation.Annotation;
+
 /**
+ * Pointcut的一个重要实现类：注解语法的切点类
+ *
  * Simple Pointcut that looks for a specific Java 5 annotation
  * being present on a {@link #forClassAnnotation class} or
  * {@link #forMethodAnnotation method}.
@@ -71,7 +73,7 @@ public class AnnotationMatchingPointcut implements Pointcut {
 	 * (can be {@code null})
 	 */
 	public AnnotationMatchingPointcut(@Nullable Class<? extends Annotation> classAnnotationType,
-			@Nullable Class<? extends Annotation> methodAnnotationType) {
+									  @Nullable Class<? extends Annotation> methodAnnotationType) {
 
 		this(classAnnotationType, methodAnnotationType, false);
 	}
@@ -89,7 +91,7 @@ public class AnnotationMatchingPointcut implements Pointcut {
 	 * @see AnnotationMethodMatcher#AnnotationMethodMatcher(Class, boolean)
 	 */
 	public AnnotationMatchingPointcut(@Nullable Class<? extends Annotation> classAnnotationType,
-			@Nullable Class<? extends Annotation> methodAnnotationType, boolean checkInherited) {
+									  @Nullable Class<? extends Annotation> methodAnnotationType, boolean checkInherited) {
 
 		Assert.isTrue((classAnnotationType != null || methodAnnotationType != null),
 				"Either Class annotation type or Method annotation type needs to be specified (or both)");

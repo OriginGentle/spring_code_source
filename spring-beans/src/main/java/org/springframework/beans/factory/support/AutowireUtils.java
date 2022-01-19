@@ -79,16 +79,16 @@ abstract class AutowireUtils {
 	 * @return whether the bean property is excluded
 	 */
 	public static boolean isExcludedFromDependencyCheck(PropertyDescriptor pd) {
-		//获取pd的写入属性值方法
+		// 获取pd的写入属性值方法
 		Method wm = pd.getWriteMethod();
-		//如果wm为nul，就认为没有问题
+		// 如果wm为nul，就认为没有问题
 		if (wm == null) {
 			return false;
 		}
-		//如果wm的声明类的类名不包含'$$'
+		// 如果wm的声明类的类名不包含'$$'
 		if (!wm.getDeclaringClass().getName().contains("$$")) {
 			// Not a CGLIB method so it's OK.
-			//如果wm的声明类的类名不包含'$$'
+			// 如果wm的声明类的类名不包含'$$'
 			return false;
 		}
 		// It was declared by CGLIB, but we might still want to autowire it
@@ -96,7 +96,7 @@ abstract class AutowireUtils {
 		// 它是由CGLIB声明的，但如果它是由超类声明的，我们可能仍然想要自动装配它。
 		// 获取wm声明类的父类
 		Class<?> superclass = wm.getDeclaringClass().getSuperclass();
-		//如果父类没有该wm方法，就认为没有问题，否则排除
+		// 如果父类没有该wm方法，就认为没有问题，否则排除
 		return !ClassUtils.hasMethod(superclass, wm);
 	}
 
@@ -110,22 +110,22 @@ abstract class AutowireUtils {
 	 * @return whether the setter method is defined by an interface
 	 */
 	public static boolean isSetterDefinedInInterface(PropertyDescriptor pd, Set<Class<?>> interfaces) {
-		//获取pd的写入属性方法
+		// 获取pd的写入属性方法
 		Method setter = pd.getWriteMethod();
-		//如果setter不为nul
+		// 如果setter不为nul
 		if (setter != null) {
-			//获取setter的声明类
+			// 获取setter的声明类
 			Class<?> targetClass = setter.getDeclaringClass();
-			//遍历 interfaces
+			// 遍历 interfaces
 			for (Class<?> ifc : interfaces) {
-				//如果 ifc 是 targetClass 的接口 && ifc中由setter的方法
+				// 如果 ifc 是 targetClass 的接口 && ifc中由setter的方法
 				if (ifc.isAssignableFrom(targetClass) && ClassUtils.hasMethod(ifc, setter)) {
-					//认为setter是接口方法
+					// 认为setter是接口方法
 					return true;
 				}
 			}
 		}
-		//默认认为setter不是接口方法
+		// 默认认为setter不是接口方法
 		return false;
 	}
 

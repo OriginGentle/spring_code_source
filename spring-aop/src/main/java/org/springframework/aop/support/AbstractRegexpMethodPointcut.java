@@ -16,15 +16,15 @@
 
 package org.springframework.aop.support;
 
-import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
+
+import java.io.Serializable;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * Abstract base regular expression pointcut bean. JavaBean properties are:
@@ -53,11 +53,15 @@ public abstract class AbstractRegexpMethodPointcut extends StaticMethodMatcherPo
 		implements Serializable {
 
 	/**
+	 *  匹配的正则表达式
+	 *
 	 * Regular expressions to match.
 	 */
 	private String[] patterns = new String[0];
 
 	/**
+	 * 排除的正则表达式们
+	 *
 	 * Regular expressions <strong>not</strong> to match.
 	 */
 	private String[] excludedPatterns = new String[0];

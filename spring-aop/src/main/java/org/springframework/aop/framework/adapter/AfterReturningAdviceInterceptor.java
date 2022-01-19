@@ -16,16 +16,18 @@
 
 package org.springframework.aop.framework.adapter;
 
-import java.io.Serializable;
-
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-
 import org.springframework.aop.AfterAdvice;
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.util.Assert;
 
+import java.io.Serializable;
+
 /**
+ * 后置返回通知Interceptor。
+ * 实现了MethodInterceptor和AfterAdvice接口。持有AfterReturningAdvice实例
+ *
  * Interceptor to wrap an {@link org.springframework.aop.AfterReturningAdvice}.
  * Used internally by the AOP framework; application developers should not need
  * to use this class directly.
@@ -52,7 +54,9 @@ public class AfterReturningAdviceInterceptor implements MethodInterceptor, After
 
 	@Override
 	public Object invoke(MethodInvocation mi) throws Throwable {
+		// 执行下一个通知/拦截器
 		Object retVal = mi.proceed();
+		// 返回通知方法
 		this.advice.afterReturning(retVal, mi.getMethod(), mi.getArguments(), mi.getThis());
 		return retVal;
 	}
