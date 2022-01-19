@@ -458,7 +458,7 @@ public abstract class ReflectionUtils {
 				throw new IllegalStateException("Not allowed to access method '" + method.getName() + "': " + ex);
 			}
 		}
-		// 如果clazz的父类不为nulll且(mf不是与未在{@code java.lang.Object}上声明的所有非桥接非合成方法匹配的预购建方法过滤器或者clazz的父类不为Object
+		// 如果clazz的父类不为null且(mf不是与未在{@code java.lang.Object}上声明的所有非桥接非合成方法匹配的预购建方法过滤器或者clazz的父类不为Object
 		if (clazz.getSuperclass() != null && (mf != USER_DECLARED_METHODS || clazz.getSuperclass() != Object.class)) {
 			// 递归方法
 			// 执行给定回调操作在clazz的父类的所有匹配方法, 子类和父类发生的相同命名方法将出现两次，
