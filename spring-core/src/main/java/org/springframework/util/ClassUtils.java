@@ -165,7 +165,7 @@ public abstract class ClassUtils {
 		// 将所有原始类型数组添加到primitiveTypes中
 		Collections.addAll(primitiveTypes, boolean[].class, byte[].class, char[].class,
 				double[].class, float[].class, int[].class, long[].class, short[].class);
-		// 遍历primitveType
+		// 遍历primitiveType
 		for (Class<?> primitiveType : primitiveTypes) {
 			// 取出primitiveType的类名作为key,primitiveType本身作为value添加到primitiveTypeNameMap中
 			primitiveTypeNameMap.put(primitiveType.getName(), primitiveType);
