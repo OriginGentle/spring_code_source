@@ -158,7 +158,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 			Assert.state(rootClass != null, "Target class must be available for creating a CGLIB proxy");
 
 			Class<?> proxySuperClass = rootClass;
-			//如果目标对象已经是CGLIB 生成代理对象（就是比较类名称中有 $$ 字符串），那么就取目标对象的父类作为目标对象的类
+			// 如果目标对象已经是CGLIB 生成代理对象（就是比较类名称中有 $$ 字符串），那么就取目标对象的父类作为目标对象的类
 			if (rootClass.getName().contains(ClassUtils.CGLIB_CLASS_SEPARATOR)) {
 				proxySuperClass = rootClass.getSuperclass();
 				// 获取原始父类的接口
