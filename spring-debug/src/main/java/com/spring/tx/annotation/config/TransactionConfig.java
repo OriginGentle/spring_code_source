@@ -1,8 +1,8 @@
 package com.spring.tx.annotation.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.spring.tx.xml.dao.BookDao;
-import com.spring.tx.xml.service.BookService;
+import com.spring.tx.annotation.dao.BookDao;
+import com.spring.tx.annotation.service.BookService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

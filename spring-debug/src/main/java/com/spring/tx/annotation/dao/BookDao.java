@@ -2,7 +2,6 @@ package com.spring.tx.annotation.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author ycb
  * @since 2022/1/27-15:47
  */
-@Repository
 public class BookDao {
 
 	@Autowired

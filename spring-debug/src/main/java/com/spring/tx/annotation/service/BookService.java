@@ -2,7 +2,6 @@ package com.spring.tx.annotation.service;
 
 import com.spring.tx.annotation.dao.BookDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author ycb
  * @since 2022/1/27-15:48
  */
-@Service
 public class BookService {
 
 	@Autowired
