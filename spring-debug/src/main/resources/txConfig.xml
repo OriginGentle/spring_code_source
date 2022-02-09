@@ -34,14 +34,13 @@
 <!--	</bean>-->
 
 <!--	<aop:config>-->
-<!--		<aop:pointcut id="txPoint" expression="execution(* com.spring.tx.*.*.*(..))"/>-->
+<!--		<aop:pointcut id="txPoint" expression="execution(* com.spring.tx.xml.*.*.*(..))"/>-->
 <!--		<aop:advisor advice-ref="myAdvice" pointcut-ref="txPoint"></aop:advisor>-->
 <!--	</aop:config>-->
 <!--	<tx:advice id="myAdvice" transaction-manager="transactionManager">-->
 <!--		<tx:attributes>-->
-<!--			<tx:method name="*"/>-->
 <!--			<tx:method name="checkout" propagation="REQUIRED"></tx:method>-->
-<!--			<tx:method name="get*" read-only="true"></tx:method>-->
+<!--			<tx:method name="updateStock" propagation="REQUIRED"></tx:method>-->
 <!--		</tx:attributes>-->
 <!--	</tx:advice>-->
 
